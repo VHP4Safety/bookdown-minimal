@@ -37,3 +37,4 @@ rsconnect/
 BOOK_ACRONYM.rds
 _book
 _bookdown_files
+.Rproj.user

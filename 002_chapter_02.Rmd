@@ -1,0 +1,83 @@
+---
+params:
+  gap_country: "Netherlands"
+---
+
+# Chapter 2; Gapminder dataset
+
+Examples adapted from: https://rpubs.com/mrahman/airdatavis
+
+```{r include = FALSE}
+# set CSS for objects
+knitr::opts_chunk$set(
+  class.source="Rchunk", 
+  class.output="Rout", 
+  warning = FALSE,
+  error = FALSE,
+  message = FALSE)
+```
+
+## Packages
+```{r}
+library(tidyverse) # for data manipulation and plotting
+library(openair)  # for air quality data analysis and visualisation
+library(lubridate) # working with date and time
+```
+
+## Data
+
+```{r}
+data_gap <- gapminder::gapminder |>
+  janitor::clean_names()
+```
+
+## All countries, life expectancy, pop size, colour continent
+```{r}
+data_gap |>
+  ggplot(
+    aes(
+      x = year,
+      y = gdp_percap
+    )
+  ) +
+  geom_point(aes(group = country, colour = continent, size = pop))
+```
+
+## Create facets for better overview
+```{r}
+data_gap |>
+  ggplot(
+    aes(
+      x = year,
+      y = gdp_percap
+    )
+  ) +
+  geom_point(aes(group = country, colour = continent, size = pop)) +
+  facet_wrap(~continent)
+```
+
+## Let's explore the Netherlands
+```{r}
+data_gap |>
+  dplyr::filter(country == "Netherlands") |>
+  ggplot(
+    aes(
+      x = year,
+      y = gdp_percap
+    )
+  ) +
+    geom_point()
+```
+
+## Using a parameter set in the bookdown header
+```{r}
+data_gap |>
+  dplyr::filter(country == params$gap_country) |>
+  ggplot(
+    aes(
+      x = year,
+      y = gdp_percap
+    )
+  ) +
+    geom_point()
+```

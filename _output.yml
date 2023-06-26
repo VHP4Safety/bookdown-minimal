@@ -1,0 +1,10 @@
+bookdown::gitbook:
+  number_sections: false
+  toc_depth: 2
+  css: style.css
+  config:
+    toc:
+      before: |
+        <li><a href="./">BOOK_ACRONYM</a></li>
+      after: |
+        <li><a href="<github_url>" target="blank">Published with bookdown</a></li>

@@ -1,0 +1,64 @@
+---
+title: "Book title"
+subtitle: "Book subtitle"
+author: "Authors"
+site: bookdown::bookdown_site
+output: 
+    bookdown::gitbook:
+        css: style.css
+        number_sections: false
+        anchor_sections: false
+        split_by: chapter
+        config:
+            sharing:
+                 github: no
+                 facebook: no
+                 twitter: no
+                 all: no
+            toc:
+                collapse: section
+                scroll_highlight: yes
+                before: <li class="toc-logo"><a href="./"></a> <h4 class=".paddingtitel ">BOOK_ACRONYM</h2></li>
+header-includes:
+  - \usepackage{fontawesome5}
+---
+
+```{r include = FALSE}
+# set CSS for objects
+knitr::opts_chunk$set(
+  class.source="Rchunk", 
+  class.output="Rout", 
+  warning = FALSE,
+  error = FALSE,
+  message = FALSE)
+```
+
+```{r include = FALSE}
+# Define the web addresses for the course
+# run as needed
+githuburl <- "<github_url>"
+readerurl <- "https://rstudio-connect.hu.nl/rmd-vhp4safety/"
+email <- "email_contactperson"
+
+save(
+    list = c("githuburl", "readerurl", "email"), 
+    file = "course_urls.RData")
+```
+
+# Book Intro
+
+Download the source code [`r icons::fontawesome("github")`](<github_url>)
+
+## Let's build a report
+We use data from the [TOXRIC](https://toxric.bioinforai.tech/download) database. See for more details: [Wu et al., 2023]( https://doi.org/10.1093%2Fnar%2Fgkac1074)
+
+## Packages
+```{r}
+library(tidyverse)
+library(tidymodels)
+```
+
+## Data
+In chapter 1,  we will use toxicity data from experiments with _Daphnia magna_ and Fathead minnow. Both datasets can be downloaded from the `TOXRIC` database, and are stored as CSV file sin the `./data-raw` folder. We will combine the data into one dataset, after some preprocessing.
+
+In chapter 2, we will use the famous Gapminder dataset. See also: https://www.gapminder.org/ 

@@ -1,0 +1,61 @@
+# Chapter 1; Ecotox
+
+```{r include = FALSE, eval = TRUE}
+# set CSS for objects
+knitr::opts_chunk$set(
+  class.source="Rchunk", 
+  class.output="Rout", 
+  warning = FALSE,
+  error = FALSE,
+  message = FALSE)
+```
+
+## Packages
+```{r}
+library(tidyverse)
+```
+
+## Data
+```{r}
+## Dapnia magna data
+data_dm <- read_csv(
+  here::here(
+    "data-raw",
+    "Ecotoxicity_LC50DM.csv"
+  )
+) |>
+  janitor::clean_names() |>
+  mutate(species = "Daphnia magna")
+
+## Fathead Minnow data
+data_fm <- read_csv(
+  here::here(
+    "data-raw",
+    "Ecotoxicity_LC50.csv"
+  )
+) |>
+  janitor::clean_names() |>
+  mutate(species = "Fathead minnow")
+
+```
+
+## Join datasets
+We will use only the compounds that are in both datasets
+```{r}
+data_dm_fm <- dplyr::bind_rows(data_dm, data_fm)
+```
+
+## Exploratory data analysis
+```{r}
+data_dm_fm |>
+  pivot_wider( 
+    names_from = species, 
+    values_from = toxicity_value) |>
+  ggplot(aes(
+    x = `Daphnia magna`,
+    y = `Fathead minnow`
+  )) +
+  geom_point() +
+  scale_x_log10() + 
+  scale_y_log10() 
+```

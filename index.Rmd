@@ -49,6 +49,13 @@ save(
 
 Download the source code [`r icons::fontawesome("github")`](<github_url>)
 
+## RMarkdown and Quatro documentation
+See for additional info: 
+
+https://bookdown.org/yihui/rmarkdown/
+
+https://quarto.org/
+
 ## Let's build a report
 We use data from the [TOXRIC](https://toxric.bioinforai.tech/download) database. See for more details: [Wu et al., 2023]( https://doi.org/10.1093%2Fnar%2Fgkac1074)
 
